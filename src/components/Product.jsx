@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
+import ScrollReveal, { FadeIn, ScaleIn } from './ScrollReveal'
 
-export default function ProductPage() {
+export default function Product() {
   const features = [
     { title: "Real-time Transcription", desc: "Live captions as you speak with near-zero latency." },
     { title: "Adjustable Font Size", desc: "Increase or decrease subtitle size instantly." },
@@ -12,12 +13,20 @@ export default function ProductPage() {
   ];
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="min-h-screen">
       <section className="text-center py-16 px-6">
-        <h1 className="text-4xl md:text-6xl font-bold text-gray-900">Smart Live Subtitles</h1>
-        <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-          Experience intelligent, real-time subtitles with AI-powered transcription, emojis, and multilingual support.
-        </p>
+        <FadeIn delay={0.4}>
+                  <h1 className="text-6xl md:text-8xl font-bold text-white mb-6 leading-tight">
+                    Smart Live Subtitles
+                    <br />
+                  </h1>
+                </FadeIn>
+                <FadeIn delay={0.6}>
+          <p className="text-xl md:text-2xl text-slate-400 mb-8 max-w-3xl mx-auto leading-relaxed">
+            Revolutionary AR smart glasses with real-time subtitle technology.
+            Breaking communication barriers for millions worldwide.
+          </p>
+        </FadeIn>
         <div className="mt-6">
           <button className="px-6 py-3 bg-indigo-600 text-white rounded-xl shadow-md hover:bg-indigo-700 transition">
             Try Demo

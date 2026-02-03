@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Volume2, Languages, Sparkles, Play, Pause } from 'lucide-react'
+import { useNavigate } from "react-router-dom";
+
+
 
 // Sample conversation data
 const conversationScenes = [
@@ -31,6 +34,7 @@ const conversationScenes = [
 ]
 
 export default function SubtitleDemo() {
+  const navigate = useNavigate();
   const [currentSceneIndex, setCurrentSceneIndex] = useState(0)
   const [displayedWords, setDisplayedWords] = useState([])
   const [isPlaying, setIsPlaying] = useState(true)
@@ -339,37 +343,39 @@ export default function SubtitleDemo() {
           transition={{ delay: 0.4 }}
           className="grid md:grid-cols-3 gap-6 mt-16 max-w-4xl mx-auto"
         >
-          {[
-            {
-              icon: '⚡',
-              title: 'Real-Time',
-              desc: 'Zero latency subtitle display'
-            },
-            {
-              icon: '🌍',
-              title: 'Multi-Language',
-              desc: '50+ languages supported'
-            },
-            {
-              icon: '✨',
-              title: 'Context-Aware',
-              desc: 'AI understands conversation flow'
-            }
-          ].map((feature, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5 + index * 0.1 }}
-              whileHover={{ y: -5 }}
-              className="text-center p-6 bg-slate-900/30 backdrop-blur-sm border border-white/5 rounded-xl"
-            >
-              <div className="text-4xl mb-3">{feature.icon}</div>
-              <h4 className="text-white font-semibold mb-2">{feature.title}</h4>
-              <p className="text-slate-400 text-sm">{feature.desc}</p>
-            </motion.div>
-          ))}
+        {[
+  {
+    icon: '⚡',
+    title: 'Real-Time',
+    desc: 'Zero latency subtitle display'
+  },
+  {
+    icon: '🌍',
+    title: 'Multi-Language',
+    desc: '50+ languages supported'
+  },
+  {
+    icon: '✨',
+    title: 'Context-Aware',
+    desc: 'AI understands conversation flow'
+  }
+].map((feature, index) => (
+  <motion.div
+    key={index}
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ delay: 0.5 + index * 0.1 }}
+    whileHover={{ y: -5, scale: 1.02 }}
+    onClick={() => navigate("/product")}
+    className="cursor-pointer text-center p-6 bg-slate-900/30 backdrop-blur-sm border border-white/5 rounded-xl hover:border-cyan-500/30 transition-all"
+  >
+    <div className="text-4xl mb-3">{feature.icon}</div>
+    <h4 className="text-white font-semibold mb-2">{feature.title}</h4>
+    <p className="text-slate-400 text-sm">{feature.desc}</p>
+  </motion.div>
+))}
+
         </motion.div>
       </div>
     </motion.section>
