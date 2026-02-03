@@ -1,61 +1,34 @@
-// import Navbar from "./components/Navbar";
-// import Footer from "./components/Footer";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-// function App() {
-//   return (
-//     <div className="flex flex-col min-h-screen">
-//       <Navbar />
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
-//       <main id="main" className="flex-1 p-6">
-//         <h1 className="text-4xl font-bold">
-//           See What You Cannot Hear
-//         </h1>
-//         <p className="mt-4 text-gray-600">
-//           Hero section text
-//         </p>
-//       </main>
-
-//       <Footer />
-//     </div>
-//   );
-// }
-
-// export default App;
-
-import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import SubtitleDemo from './components/SubtitleDemo'
-import PricingSection from './components/PricingSection'
-import Footer from './components/Footer'
+import Home from "./pages/Home";
+import About from "./pages/About";
 
 function App() {
   return (
-    <div className="min-h-screen bg-slate-950">
-      {/* Navbar - Sticky at top */}
-      <Navbar />
+    <BrowserRouter>
+      <div className="min-h-screen bg-slate-950 flex flex-col">
+        {/* Navbar always visible */}
+        <Navbar />
 
-      {/* Main Content */}
-      <main>
-        {/* Hero Section */}
-        <Hero />
+        {/* Routed content */}
+        <main className="flex-1">
+          <Routes>
+            {/* Home Page */}
+            <Route path="/" element={<Home />} />
 
-        {/* Subtitle Demo Section */}
-        <SubtitleDemo />
+            {/* About Page */}
+            <Route path="/about" element={<About />} />
+          </Routes>
+        </main>
 
-        {/* Pricing Section */}
-        <PricingSection />
-
-        {/* You can add more sections here later */}
-        {/* <ProductFeatures /> */}
-        {/* <HowItWorks /> */}
-        {/* <Impact /> */}
-        {/* <Contact /> */}
-      </main>
-
-      {/* Footer */}
-      <Footer />
-    </div>
-  )
+        {/* Footer always visible */}
+        <Footer />
+      </div>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
