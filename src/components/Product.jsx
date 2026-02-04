@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import ScrollReveal, { FadeIn, ScaleIn } from './ScrollReveal'
+import { FaMicrophone, FaSmile, FaMagic } from "react-icons/fa";
 
 export default function Product() {
   const features = [
@@ -64,13 +65,21 @@ export default function Product() {
 
       <section className="text-center py-12">
         <h2 className="text-2xl font-semibold">Smart Emoji Subtitles</h2>
-        <motion.div
-          className="text-5xl mt-4"
-          animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 1, repeat: Infinity }}
-        >
-          😊 🎉 🎙️
-        </motion.div>
+<motion.div
+  className="flex justify-center gap-16 mt-6 text-7xl text-indigo-600"
+>
+  {[FaSmile, FaMagic, FaMicrophone].map((Icon, i) => (
+    <motion.div
+      key={i}
+      whileHover={{ scale: 1.25 }}
+      transition={{ type: "spring", stiffness: 250 }}
+    >
+      <Icon />
+    </motion.div>
+  ))}
+</motion.div>
+
+
       </section>
 
       <section className="text-center py-16 bg-indigo-600 text-white">
