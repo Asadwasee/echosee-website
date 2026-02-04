@@ -1,54 +1,61 @@
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Volume2, Languages, Sparkles, Play, Pause } from 'lucide-react'
-import { useNavigate } from "react-router-dom";
-
-
+import { AnimatePresence } from 'framer-motion'
+import {
+  Volume2,
+  Languages,
+  Sparkles,
+  Play,
+  Pause,
+  Hand,
+  Mountain,
+  Squirrel,
+  Bird
+} from 'lucide-react'
 
 // Sample conversation data
 const conversationScenes = [
   {
     speaker: 'Sarah',
     text: 'Hey! How was your weekend?',
-    emoji: '👋',
+    icon: Hand,
     language: 'English'
   },
   {
     speaker: 'Carlos',
     text: '¡Fue increíble! Went hiking in the mountains.',
-    emoji: '⛰️',
+    icon: Mountain,
     language: 'Spanish/English'
   },
   {
     speaker: 'Sarah',
     text: 'That sounds amazing! Did you see any wildlife?',
-    emoji: '🦌',
+    icon: Squirrel,
     language: 'English'
   },
   {
     speaker: 'Carlos',
     text: 'Yes! We spotted a deer and some eagles.',
-    emoji: '🦅',
+    icon: Bird,
     language: 'English'
   }
 ]
 
 export default function SubtitleDemo() {
-  const navigate = useNavigate();
   const [currentSceneIndex, setCurrentSceneIndex] = useState(0)
   const [displayedWords, setDisplayedWords] = useState([])
   const [isPlaying, setIsPlaying] = useState(true)
-  const [showEmoji, setShowEmoji] = useState(false)
+  const [showIcon, setShowIcon] = useState(false)
 
   const currentScene = conversationScenes[currentSceneIndex]
   const words = currentScene.text.split(' ')
+  const IconComponent = currentScene.icon
 
   // Word-by-word typing animation
   useEffect(() => {
     if (!isPlaying) return
 
     setDisplayedWords([])
-    setShowEmoji(false)
+    setShowIcon(false)
 
     let wordIndex = 0
     const interval = setInterval(() => {
@@ -56,8 +63,8 @@ export default function SubtitleDemo() {
         setDisplayedWords((prev) => [...prev, words[wordIndex]])
         wordIndex++
       } else {
-        // Show emoji at the end
-        setShowEmoji(true)
+        // Show icon at the end
+        setShowIcon(true)
 
         // Move to next scene after delay
         setTimeout(() => {
@@ -69,7 +76,7 @@ export default function SubtitleDemo() {
     }, 300) // 300ms delay between words
 
     return () => clearInterval(interval)
-  }, [currentSceneIndex, isPlaying])
+  }, [currentSceneIndex, isPlaying, words, words.length]) // Fixed: added words and words.length
 
   // Animation variants
   const wordVariants = {
@@ -86,7 +93,7 @@ export default function SubtitleDemo() {
     }
   }
 
-  const emojiVariants = {
+  const iconVariants = {
     hidden: { scale: 0, rotate: -180 },
     visible: {
       scale: 1,
@@ -113,10 +120,10 @@ export default function SubtitleDemo() {
   }
 
   return (
-    <motion.section id="demo" className="relative py-24 bg-slate-950 overflow-hidden">
+    <section id="demo" className="relative py-24 bg-slate-950 overflow-hidden">
       {/* Background effects */}
       <div className="absolute inset-0 bg-linear-to-b from-slate-900 via-slate-950 to-slate-900" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[200px] h-[200px] bg-cyan-500/5 rounded-full blur-3xl" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-800px h-800px bg-cyan-500/5 rounded-full blur-3xl" />
 
       {/* Animated grid background */}
       <div className="absolute inset-0 opacity-10">
@@ -218,7 +225,7 @@ export default function SubtitleDemo() {
                     </div>
 
                     {/* Animated Subtitle Text */}
-                    <div className="min-h-[80px] flex items-center">
+                    <div className="min-h-80pxflex items-center">
                       <p className="text-2xl md:text-3xl font-medium text-white leading-relaxed">
                         <AnimatePresence mode="wait">
                           {displayedWords.map((word, index) => (
@@ -233,15 +240,15 @@ export default function SubtitleDemo() {
                             </motion.span>
                           ))}
 
-                          {/* Emoji animation */}
-                          {showEmoji && (
+                          {/* Icon animation */}
+                          {showIcon && IconComponent && (
                             <motion.span
-                              variants={emojiVariants}
+                              variants={iconVariants}
                               initial="hidden"
                               animate="visible"
-                              className="inline-block text-4xl ml-2"
+                              className="inline-flex items-center ml-2"
                             >
-                              {currentScene.emoji}
+                              <IconComponent className="w-8 h-8 text-cyan-400" />
                             </motion.span>
                           )}
                         </AnimatePresence>
@@ -343,41 +350,44 @@ export default function SubtitleDemo() {
           transition={{ delay: 0.4 }}
           className="grid md:grid-cols-3 gap-6 mt-16 max-w-4xl mx-auto"
         >
-        {[
-  {
-    icon: '⚡',
-    title: 'Real-Time',
-    desc: 'Zero latency subtitle display'
-  },
-  {
-    icon: '🌍',
-    title: 'Multi-Language',
-    desc: '50+ languages supported'
-  },
-  {
-    icon: '✨',
-    title: 'Context-Aware',
-    desc: 'AI understands conversation flow'
-  }
-].map((feature, index) => (
-  <motion.div
-    key={index}
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ delay: 0.5 + index * 0.1 }}
-    whileHover={{ y: -5, scale: 1.02 }}
-    onClick={() => navigate("/product")}
-    className="cursor-pointer text-center p-6 bg-slate-900/30 backdrop-blur-sm border border-white/5 rounded-xl hover:border-cyan-500/30 transition-all"
-  >
-    <div className="text-4xl mb-3">{feature.icon}</div>
-    <h4 className="text-white font-semibold mb-2">{feature.title}</h4>
-    <p className="text-slate-400 text-sm">{feature.desc}</p>
-  </motion.div>
-))}
-
+          {[
+            {
+              icon: Sparkles,
+              title: 'Real-Time',
+              desc: 'Zero latency subtitle display',
+              color: 'text-cyan-400'
+            },
+            {
+              icon: Languages,
+              title: 'Multi-Language',
+              desc: '50+ languages supported',
+              color: 'text-purple-400'
+            },
+            {
+              icon: Volume2,
+              title: 'Context-Aware',
+              desc: 'AI understands conversation flow',
+              color: 'text-blue-400'
+            }
+          ].map((feature, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5 + index * 0.1 }}
+              whileHover={{ y: -5 }}
+              className="text-center p-6 bg-slate-900/30 backdrop-blur-sm border border-white/5 rounded-xl"
+            >
+              <feature.icon
+                className={`w-10 h-10 mx-auto mb-3 ${feature.color}`}
+              />
+              <h4 className="text-white font-semibold mb-2">{feature.title}</h4>
+              <p className="text-slate-400 text-sm">{feature.desc}</p>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
-    </motion.section>
+    </section>
   )
 }
