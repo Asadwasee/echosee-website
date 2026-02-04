@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+
 import { ArrowRight, Sparkles, Globe, Battery, Type, Smile } from 'lucide-react'
 import { FadeIn, ScaleIn } from './ScrollReveal'
 
@@ -53,7 +53,7 @@ export default function Hero() {
   useEffect(() => {
     let i = 0
     const interval = setInterval(() => {
-      setTypedText((prev) => fullText.slice(0, i))
+      setTypedText(fullText.slice(0, i))
       i += 1
       if (i > fullText.length) clearInterval(interval)
     }, 38)

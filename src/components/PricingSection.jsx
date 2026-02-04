@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { Check, Zap, Crown, ArrowRight } from 'lucide-react'
+import { Check, Zap, Crown, ArrowRight, Star } from 'lucide-react'
 
 const pricingPlans = {
   basic: {
@@ -179,8 +178,9 @@ export default function PricingSection() {
                     animate={{ opacity: 1, y: 0 }}
                     className="absolute -top-4 left-1/2 -translate-x-1/2 z-10"
                   >
-                    <div className="bg-linear-to-r from-amber-500 to-orange-500 text-slate-950 px-6 py-2 rounded-full font-bold text-sm shadow-lg">
-                      ⭐ RECOMMENDED
+                    <div className="bg-linear-to-r from-amber-500 to-orange-500 text-slate-950 px-6 py-2 rounded-full font-bold text-sm shadow-lg flex items-center gap-2">
+                      <Star className="w-4 h-4 fill-slate-950" />
+                      RECOMMENDED
                     </div>
                   </motion.div>
                 )}
