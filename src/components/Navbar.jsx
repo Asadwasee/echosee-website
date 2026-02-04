@@ -1,49 +1,29 @@
-import React, { useState, useEffect } from 'react'
-import { Menu, X, ShoppingCart, Globe, Moon, Sun } from 'lucide-react'
+import React, { useState } from 'react'
+import { Menu, X, ShoppingCart, Globe } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const navItems = [
-  { label: 'Product', href: '#product' },
-  { label: 'How It Works', href: '#how' },
+  { label: 'Product', href: '/product' },
+  { label: 'How It Works', href: '#how-it-works' },
   { label: 'Pricing', href: '#pricing' },
+  { label: 'About Us', href: '/about' },
   { label: 'Impact', href: '#impact' },
   { label: 'Contact', href: '#contact' }
 ]
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
-  const [theme, setTheme] = useState(() => {
-    try {
-      return localStorage.getItem('echosee-theme') || 'dark'
-    } catch {
-      return 'dark'
-    }
-  })
-
-  useEffect(() => {
-    const root = window.document.documentElement
-    if (theme === 'dark') {
-      root.classList.add('dark')
-    } else {
-      root.classList.remove('dark')
-    }
-    try {
-      localStorage.setItem('echosee-theme', theme)
-    } catch {
-      // Ignore write errors
-    }
-  }, [theme])
 
   return (
-    <header className="bg-slate-950/90 text-slate-50 sticky top-0 z-40 backdrop-blur-md border-b border-cyan-500/20 shadow-[0_0_20px_rgba(34,211,238,0.1)]">
+    <header className="bg-slate-950/90 text-slate-50 sticky top-0 z-50 backdrop-blur-md border-b border-cyan-500/20 shadow-[0_0_20px_rgba(34,211,238,0.1)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
-          {/* Left: Logo */}
+          
           <div className="flex items-center gap-4">
             <a
-              href="#"
+              href="/"
               className="flex items-center gap-3 focus-visible:ring-2 focus-visible:ring-cyan-400 rounded p-1"
-              aria-label="EchoSee home"
+              aria-label="EchoSee Home"
             >
               <motion.div
                 whileHover={{ scale: 1.1, rotate: 5 }}
@@ -53,7 +33,7 @@ export default function Navbar() {
               </motion.div>
 
               <div className="leading-tight">
-                <div className="font-bold text-xl tracking-tight text-white">
+                <div className="font-bold text-xl tracking-tight text-white uppercase">
                   ECHO<span className="text-cyan-400">SEE</span>
                 </div>
                 <div className="text-[10px] uppercase tracking-[0.2em] text-cyan-500 font-semibold">
@@ -63,9 +43,9 @@ export default function Navbar() {
             </a>
           </div>
 
-          {/* Center nav - desktop */}
+          {/* Desktop navbar */}
           <nav
-            className="hidden md:flex items-center gap-8"
+            className="hidden lg:flex items-center gap-6"
             aria-label="Primary"
           >
             {navItems.map((it) => (
@@ -73,42 +53,33 @@ export default function Navbar() {
                 key={it.label}
                 href={it.href}
                 className="relative text-slate-300 hover:text-cyan-400 text-sm font-medium transition-colors"
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ y: -2 }}
               >
                 {it.label}
               </motion.a>
             ))}
           </nav>
 
-          {/* Right: actions */}
+          {/* Right: Pre-Order Button */}
           <div className="flex items-center gap-3">
-            <button
-              onClick={() => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))}
-              className="p-2 rounded-full hover:bg-cyan-500/10 text-slate-400 hover:text-cyan-400 transition-all"
-            >
-              {theme === 'dark' ? (
-                <Sun className="w-5 h-5" />
-              ) : (
-                <Moon className="w-5 h-5" />
-              )}
-            </button>
-
             <motion.a
-              href="#preorder"
+              href="/preorder"
               whileHover={{
                 scale: 1.05,
                 boxShadow: '0 0 20px rgba(34,211,238,0.4)'
               }}
               whileTap={{ scale: 0.95 }}
-              className="hidden md:inline-flex items-center gap-2 bg-cyan-500 text-slate-950 px-5 py-2 rounded-full font-bold text-sm"
+              className="hidden md:inline-flex items-center gap-2 bg-cyan-500 text-slate-950 px-6 py-2 rounded-full font-bold text-sm"
             >
               <ShoppingCart className="w-4 h-4" />
               Pre-Order
             </motion.a>
 
+            {/* Mobile Menu Toggle */}
             <button
-              className="md:hidden p-2 text-cyan-400"
+              className="lg:hidden p-2 text-cyan-400"
               onClick={() => setOpen((s) => !s)}
+              aria-label="Toggle Menu"
             >
               {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -116,27 +87,29 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile Menu (Animated) */}
       <AnimatePresence>
         {open && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="md:hidden bg-slate-900 border-t border-cyan-500/20 overflow-hidden"
+            className="lg:hidden bg-slate-900 border-t border-cyan-500/20 overflow-hidden"
           >
             <div className="px-6 py-8 flex flex-col gap-6">
               {navItems.map((it) => (
                 <a
                   key={it.label}
                   href={it.href}
-                  className="text-xl font-medium text-slate-200 hover:text-cyan-400"
+                  onClick={() => setOpen(false)}
+                  className="text-xl font-medium text-slate-200 hover:text-cyan-400 transition-colors"
                 >
                   {it.label}
                 </a>
               ))}
               <a
-                href="#preorder"
+                href="/preorder"
+                onClick={() => setOpen(false)}
                 className="flex items-center justify-center gap-2 bg-cyan-500 text-slate-950 py-4 rounded-xl font-bold"
               >
                 Pre-Order Now
