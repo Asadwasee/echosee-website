@@ -34,7 +34,8 @@ const videoRef = useRef(null);
     loop
     playsInline
   >
-    <source src="videos/demo.mp4" type="video/mp4" />
+   <source src="/videos/demo.mp4" type="video/mp4" />
+
   </video>
 
   {/* Optional: Play overlay when not hovering */}
