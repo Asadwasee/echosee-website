@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { motion } from "framer-motion";
 import { Check, Zap, Crown, ArrowRight, Star } from 'lucide-react'
 
 const pricingPlans = {

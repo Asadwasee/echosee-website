@@ -1,11 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Product from "./pages/Product";
 
 import Home from "./pages/Home";
 import About from "./pages/About";
+import PricingSection from "./components/PricingSection";
+import Shop from "./pages/Shop";
 
 
 function App() {
@@ -20,11 +21,10 @@ function App() {
           <Routes>
 
             <Route path="/product" element={<Product />} />
-            {/* Home Page */}
             <Route path="/" element={<Home />} />
-
-            {/* About Page */}
+            <Route path="/pricing" element={<PricingSection />} />
             <Route path="/about" element={<About />} />
+            <Route path="/preorder" element={<Shop />} />
 
           </Routes>
         </main>

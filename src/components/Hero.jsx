@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-
+import { motion } from "framer-motion";
 import { ArrowRight, Sparkles, Globe, Battery, Type, Smile } from 'lucide-react'
 import { FadeIn, ScaleIn } from './ScrollReveal'
 

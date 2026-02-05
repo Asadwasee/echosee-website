@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { AnimatePresence } from 'framer-motion'
+import { motion } from "framer-motion";
 import {
   Volume2,
   Languages,
