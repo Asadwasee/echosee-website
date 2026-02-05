@@ -5,7 +5,7 @@ export default function PrototypeDemo() {
   const [isHovering, setIsHovering] = useState(false);
 const videoRef = useRef(null);
   return (
-    <section className="py-16 px-6 bg-white">
+    <section className="py-16 px-6">
       <h2 className="text-3xl font-bold text-center mb-8">
         Prototype / MVP Demo
       </h2>
