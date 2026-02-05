@@ -4,6 +4,7 @@ import { FaSmile, FaStar } from "react-icons/fa";
 export default function ProductFeatures({ features }) {
   return (
     <section className="py-16 px-6">
+      
       <h2 className="text-3xl font-bold text-center mb-8">Key Features</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
