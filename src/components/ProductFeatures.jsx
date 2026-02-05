@@ -38,7 +38,6 @@ export default function ProductFeatures({ features }) {
       ●
     </motion.span>
 
-    {/* Subtitle text mock */}
     <motion.span
       initial={{ width: 0 }}
       animate={{ width: "100%" }}
@@ -48,7 +47,6 @@ export default function ProductFeatures({ features }) {
       Hello! This is amazing
     </motion.span>
 
-    {/* Icon "pop" animation */}
     <motion.span
       initial={{ scale: 0 }}
       animate={{ scale: 1 }}

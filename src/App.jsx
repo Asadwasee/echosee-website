@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import PricingSection from "./components/PricingSection";
 import Shop from "./pages/Shop";
+import HowItWorks from "./pages/HowItWorks";
 
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
           <Routes>
 
             <Route path="/product" element={<Product />} />
-            <Route path="/" element={<Home />} />
+            <Route path="/howitworks" element={<HowItWorks />} />
             <Route path="/pricing" element={<PricingSection />} />
             <Route path="/about" element={<About />} />
             <Route path="/preorder" element={<Shop />} />
