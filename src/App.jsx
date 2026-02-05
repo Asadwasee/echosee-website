@@ -20,7 +20,7 @@ function App() {
         {/* Routed content */}
         <main className="flex-1">
           <Routes>
-
+            <Route path="/" element={<Home />} />
             <Route path="/product" element={<Product />} />
             <Route path="/howitworks" element={<HowItWorks />} />
             <Route path="/pricing" element={<PricingSection />} />
