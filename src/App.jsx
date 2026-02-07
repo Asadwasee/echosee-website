@@ -8,6 +8,8 @@ import About from "./pages/About";
 import PricingSection from "./components/PricingSection";
 import Shop from "./pages/Shop";
 import HowItWorks from "./pages/HowItWorks";
+import Contact from "./pages/Contact";
+
 
 
 function App() {
@@ -25,6 +27,7 @@ function App() {
             <Route path="/howitworks" element={<HowItWorks />} />
             <Route path="/pricing" element={<PricingSection />} />
             <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/preorder" element={<Shop />} />
 
           </Routes>
